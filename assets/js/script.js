@@ -285,3 +285,18 @@ function futureDates(nthDays) {
     return xDays;
 }
 
+// get last search before page was refreshed and display that data
+function previData() {
+    if (localStorage.length > 0){
+        userSearch = localStorage.getItem(localStorage.length - 1 );
+        userSearch = userSearch.replace('"', "");
+        userSearch = userSearch.replace('"', '');
+        let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
+        makingWeatherCall(curWeatherAPI);
+        previBtns();
+    }
+    else {
+        console.log("There is no recent search history");
+    }
+};
+
