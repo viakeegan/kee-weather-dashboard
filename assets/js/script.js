@@ -1,404 +1,166 @@
-// variables
-let myAPIWeatherKey = "&units=imperial&APPID=a15f02adbde7a78309af009d972b4360";
-let userSearch = "";
-let storeKey = localStorage.length;
+var searchBtn = document.querySelector("#search-btn");
+var resultsContainer = document.querySelector("#results-container");
+var citySearchEl = document.querySelector("#city-search"); 
+var infoContainerEl = document.querySelector("#info-container");
+var forecastRowEl = document.querySelector("#forecast-row");
+var alertEl = document.querySelector("#alert");
+var historyContainer = document.querySelector("#city-history");
+var cityHistoryBtn = document.querySelector("#city-history");
 
-// all ids for the 5 day forecast
-let dayOneItems = [
-    "#dayOneDate",
-    "#dayOneIcon",
-    "#dayOneTemp",
-    "#dayOneWind",
-    "#dayOneHumid",
-    "#dayOneUV"
-];
+var currentDate = moment().format("MM/DD/YYYY");
+var dayIndex = 1
+var cityHistory = [];
 
-let dayTwoItems = [
-    "#dayTwoDate",
-    "#dayTwoIcon",
-    "#dayTwoTemp",
-    "#dayTwoWind",
-    "#dayTwoHumid",
-    "#dayTwoUV"
-];
+var formSubmitHandler = function(event) {
+  event.preventDefault();
 
-let dayThreeItems = [
-    "#dayThreeDate",
-    "#dayThreeIcon",
-    "#dayThreeTemp",
-    "#dayThreeWind",
-    "#dayThreeHumid",
-    "#dayThreeUV"
-];
+  var userCity = citySearchEl.value.trim();
 
-let dayFourItems = [
-    "#dayFourDate",
-    "#dayFourIcon",
-    "#dayFourTemp",
-    "#dayFourWind",
-    "#dayFourHumid",
-    "#dayFourUV"
-];
-
-let dayFiveItems = [
-    "#dayFiveDate",
-    "#dayFiveIcon",
-    "#dayFiveTemp",
-    "#dayFiveWind",
-    "#dayFiveHumid",
-    "#dayFiveUV"
-];
-
-// fetching data from Open Weather Map based off city or zipcode
-function makingWeatherCall(weather) {
-    fetch(weather)
-    .then(response => response.json())
-    .then(function(data) {
-
-        // Pull the lattitude and longitude and use that to make a onecall
-        // to openweathermap to get current and future forecasts.
-        let oneCallAPI = fetchOneCall(data.coord.lat, data.coord.lon);
-        fetch(oneCallAPI)
-        .then(response => response.json())
-        .then(function(data) {
-            // Display current temp
-            let currentTemp = Math.round(data.current.temp);
-            $("#curDayTemp").text(currentTemp + "*F");
-
-            // Display current wind speed
-            let curWind = Math.round(data.current.wind_gust);
-            $("#curDayWind").text(curWind + " MPH");
-
-            // Display current humidity
-            let curHumid = Math.round(data.current.humidity);
-            $("#curDayHumid").text(curHumid + "%");
-
-            // Display current UV index
-            let curUV = data.current.uvi;
-            // color coding based on the intensity of the UV Index
-            if (curUV < 3) {
-                $("#curDayUV").css("background-color", "rgb(0,150,0)");
-            }
-            else if (curUV >=3 && curUV < 6) {
-                $("#curDayUV").css("background-color", "rgb(196, 196, 23)");
-            }
-            else if (curUV >= 6 && curUV < 8) {
-                $("#curDayUV").css("background-color", "rgb(196, 92, 23)");
-            }
-            else if (curUV >= 8 && curUV < 11) {
-                $("#curDayUV").css("background-color", "rgb(175, 0, 0)");
-            }
-            else if (curUV >= 11) {
-                $("#curDayUV").css("background-color", "rgb(121, 0, 40)");
-            }
-            $("#curDayUV").text(curUV);
-
-             // for loop through index 0 - 4
-             for (let i = 0; i < 5; i++) {
-                let dailyIcon = data.daily[i].weather[0].icon;
-                let dailyTemp = data.daily[i].temp.day;
-                let dailyWind = data.daily[i].wind_gust;
-                let dailyHumid = data.daily[i].humidity;
-                let dailyUV = data.daily[i].uvi
-
-                switch(i) {
-                    // loading all data for day 1
-                    case 0:
-                        for (let x = 0; x < dayOneItems.length; x++) {
-                            switch(x) {
-                                case 0:
-                                    $(dayOneItems[x]).text(futureDates(i + 1));
-                                    break;
-                                case 1:
-                                    $(dayOneItems[x]).attr("src", usingIcon(dailyIcon));
-                                    break;
-                                case 2:
-                                    $(dayOneItems[x]).text(dailyTemp + "*F");
-                                    break;
-                                case 3:
-                                    $(dayOneItems[x]).text(dailyWind + " MPH");
-                                    break;
-                                case 4:
-                                    $(dayOneItems[x]).text(dailyHumid + "%");
-                                    break;
-                                case 5:
-                                    $(dayOneItems[x]).text(dailyUV);
-                                    break;
-                                default:
-                                    console.log("Obviously you are an idiot... or this needs to go to next day's data");
-                            }
-                        }
-                        break;
-
-                    // loading all data for day 2
-                    case 1:
-                        for (let x = 0; x < dayTwoItems.length; x++) {
-                            switch(x) {
-                                case 0:
-                                    $(dayTwoItems[x]).text(futureDates(i + 1));
-                                    break;
-                                case 1:
-                                    $(dayTwoItems[x]).attr("src", usingIcon(dailyIcon));
-                                    break;
-                                case 2:
-                                    $(dayTwoItems[x]).text(dailyTemp + "*F");
-                                    break;
-                                case 3:
-                                    $(dayTwoItems[x]).text(dailyWind + " MPH");
-                                    break;
-                                case 4:
-                                    $(dayTwoItems[x]).text(dailyHumid + "%");
-                                    break;
-                                case 5:
-                                    $(dayTwoItems[x]).text(dailyUV);
-                                    break;
-                                default:
-                                    console.log("Obviously you are an idiot... or this needs to go to next day's data");
-                            }
-                        }
-                        break;
-
-                    // loading all data for day 3                        
-                    case 2:
-                        for (let x = 0; x < dayThreeItems.length; x++) {
-                            switch(x) {
-                                case 0:
-                                    $(dayThreeItems[x]).text(futureDates(i + 1));
-                                    break;
-                                case 1:
-                                    $(dayThreeItems[x]).attr("src", usingIcon(dailyIcon));
-                                    break;
-                                case 2:
-                                    $(dayThreeItems[x]).text(dailyTemp + "*F");
-                                    break;
-                                case 3:
-                                    $(dayThreeItems[x]).text(dailyWind + "MPH");
-                                    break;
-                                case 4:
-                                    $(dayThreeItems[x]).text(dailyHumid + "%");
-                                    break;
-                                case 5:
-                                    $(dayThreeItems[x]).text(dailyUV);
-                                    break;
-                                default:
-                                    console.log("Obviously you are an idiot... or this needs to go to next day's data");
-                            }
-                        }
-                        break;
-
-                    // loading all data for day 4
-                    case 3:
-                        for (let x = 0; x < dayFourItems.length; x++) {
-                            switch(x) {
-                                case 0:
-                                    $(dayFourItems[x]).text(futureDates(i + 1));
-                                    break;
-                                case 1:
-                                    $(dayFourItems[x]).attr("src", usingIcon(dailyIcon));
-                                    break;
-                                case 2:
-                                    $(dayFourItems[x]).text(dailyTemp + "*F");
-                                    break;
-                                case 3:
-                                    $(dayFourItems[x]).text(dailyWind + " MPH");
-                                    break;
-                                case 4:
-                                    $(dayFourItems[x]).text(dailyHumid + "%");
-                                    break;
-                                case 5:
-                                    $(dayFourItems[x]).text(dailyUV);
-                                    break;
-                                default:
-                                    console.log("Obviously you are an idiot... or this needs to go to next day's data");
-                            }
-                        }
-                        break;
-                    // loading data for day 5
-                    case 4:
-                        for (let x = 0; x < dayFiveItems.length; x++) {
-                            switch(x) {
-                                case 0:
-                                    $(dayFiveItems[x]).text(futureDates(i + 1));
-                                    break;
-                                case 1:
-                                    $(dayFiveItems[x]).attr("src", usingIcon(dailyIcon));
-                                    break;
-                                case 2:
-                                    $(dayFiveItems[x]).text(dailyTemp + "*F");
-                                    break;
-                                case 3:
-                                    $(dayFiveItems[x]).text(dailyWind + " MPH");
-                                    break;
-                                case 4:
-                                    $(dayFiveItems[x]).text(dailyHumid + "%");
-                                    break;
-                                case 5:
-                                    $(dayFiveItems[x]).text(dailyUV);
-                                    break;
-                                default:
-                                    console.log("Obviously you are an idiot... or this needs to go to next day's data");
-                            }
-                        }
-                        break;
-                }
-            }
-        });
-
-       // Reverse geocoding to pull the city and state and display that in the current weather
-       let reversed = reverseGeo(data.coord.lat, data.coord.lon);
-       fetch(reversed)
-       .then(response => response.json())
-       .then(function(data) {
-           let city = data[0].name;
-           let state = data[0].state;
-           $("#currentCityDate").text("");
-           $("#currentCityDate").text(city + ", " + state + " " + moment().format("MM/DD/YYYY"));
-       });
-       
-        // Adding icon to represent current weather
-        let curIcon = usingIcon(data.weather[0].icon);
-        $("#curIcon").attr("src", curIcon);
-    });
+  if (userCity) {
+    getLatLong(userCity);
+    citySearchEl.value = "";
+    alertEl.className = "alert"
+    alertEl.classList.add("hide");
+  }
+  else {
+    citySearchEl.value = "";
+    alertEl.classList.remove("hide");
+  }
 };
 
-// a function to keep from writing out the link everytime.
-function usingIcon(icon) {
-    let iconPath = "https://openweathermap.org/img/w/" + icon + ".png";
-    return iconPath;
-};
-
-// a function to keep from writing out the link everytime.
-function fetchOneCall(lat, lon) {
-    let ppfWeatherData = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly" + myAPIWeatherKey;
-    return ppfWeatherData;
-};
-
-// a function to keep from writing out the link everytime.
-function reverseGeo(lat, lon) {
-    let reversing = "http://api.openweathermap.org/geo/1.0/reverse?lat=" + lat + "&lon=" + lon + "&limit=1&appid=a15f02adbde7a78309af009d972b4360";
-    return reversing;
+var getLatLong = function(userInput) {
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${userInput}&units=imperial&appid=e6f1180431902688ee08af2326efb755`
+  fetch(apiUrl)
+      .then(function(response) {
+        if (response.ok) {
+          response.json().then(function(data) {
+            var cityName = data.name;
+            dayIndex = 1;
+            getForecast(data, cityName);
+            searchHistory(cityName);
+          })
+        }
+        else {
+          alertEl.classList.remove("hide");
+          return formSubmitHandler();
+        }
+      })
 }
 
-// a function for automating the dates for the 5 day forecast $(dayOneItems[x]).text(moment().add(1, "d"))
-function futureDates(nthDays) {
-    let xDays = moment().add(nthDays, "d").format("MM/DD/YYYY");
-    return xDays;
+var getForecast = function(data, cityName) {
+  resultsContainer.classList.remove("hide");
+  var latEl = data.coord.lat
+  var longEl = data.coord.lon
+  var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latEl}&lon=${longEl}&units=imperial&appid=e6f1180431902688ee08af2326efb755`
+  fetch(apiUrl)
+      .then(function(response) {
+        if (response.ok) {
+          response.json().then(function(data) {
+            displayForecast(data, cityName)
+          })
+        }
+      })
 }
 
-// get last search before page was refreshed and display that data
-function previData() {
-    if (localStorage.length > 0){
-        userSearch = localStorage.getItem(localStorage.length - 1 );
-        userSearch = userSearch.replace('"', "");
-        userSearch = userSearch.replace('"', '');
-        let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
-        makingWeatherCall(curWeatherAPI);
-        previBtns();
+var searchHistory = function(cityName) {
+  var getHistoryStorage = JSON.parse(localStorage.getItem("City History"));
+  var historyBtn = document.createElement("button");
+  if (getHistoryStorage === null) {
+    cityHistory.push(cityName);
+    historyBtn.textContent = cityName;
+    historyBtn.classList.add("w-100");
+    historyBtn.classList.add("history-btn");
+    historyBtn.setAttribute("id", "city-history");
+    historyContainer.appendChild(historyBtn);
+    localStorage.setItem("City History", JSON.stringify(cityHistory));
+  }
+  else {
+    cityHistory = getHistoryStorage;
+    if (cityHistory.includes(cityName)) {
+      return null;
     }
     else {
-        console.log("There is no recent search history");
+      historyBtn.textContent = cityName;
+      historyBtn.classList.add("w-100");
+      historyBtn.classList.add("history-btn");
+      historyBtn.setAttribute("id", "city-history");
+      historyContainer.appendChild(historyBtn);
+      cityHistory.push(cityName);
+      localStorage.setItem("City History", JSON.stringify(cityHistory));
     }
-};
-
-function previBtns() {
-    // loop through local storage and create buttons for the 5 most recent searches
-    for (let i = 0; i <= localStorage.length; i++) {
-        // button creation
-        let previBtn = $("<button></button>");
-        // variable to hold the code to retrieve the most recent items
-        let previ = localStorage.getItem(localStorage.length - i);
-        // i has to be greater than 0 or else its going to be undefined since the length is one number larger than the final index spot
-        // i has to be less than 6 so there can only be 5 buttons at most.
-        if (i > 0 && i < 6) {
-            // the next two lines of code are to get rid of the quotations.
-            previ = previ.replace('"',"");
-            previ = previ.replace('"',"");
-            // add the value of the localStorage to the button text
-            previBtn.text(previ);
-            previBtn.addClass("previBtns");
-            previBtn.attr("id", "previBtn"+i);
-            $("#previousSearch").append(previBtn);
-        }
-    }
+  }       
 }
 
-previData();
-
-// User search data and displaying the data they are requesting
-$(".searchBtn").click(function() {
-    userSearch = $("#search").val();
-    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
-    makingWeatherCall(curWeatherAPI);
-
-    // setting search value in local storage
-    localStorage.setItem(storeKey, JSON.stringify(userSearch));
-    location.reload();
-    storeKey++;
-});
-
-console.log($("#previousSearch").children()[0]);
-console.log($("#previousSearch").children()[1]);
-console.log($("#previousSearch").children()[2]);
-console.log($("#previousSearch").children()[3]);
-console.log($("#previousSearch").children()[4]);
-
-$("#previBtn1").click(function() {
-    userSearch = $(this).text();
-    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
-    makingWeatherCall(curWeatherAPI);
-
-    // setting search value in local storage
-    localStorage.setItem(storeKey, JSON.stringify(userSearch));
-    location.reload();
-    storeKey++;
-});
-
-$("#previBtn2").click(function() {
-    userSearch = $(this).text();
-    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
-    makingWeatherCall(curWeatherAPI);
-
-    // setting search value in local storage
-    localStorage.setItem(storeKey, JSON.stringify(userSearch));
-    location.reload();
-    storeKey++;
-});
-
-$("#previBtn3").click(function() {
-    userSearch = $(this).text();
-    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
-    makingWeatherCall(curWeatherAPI);
-
-    // setting search value in local storage
-    localStorage.setItem(storeKey, JSON.stringify(userSearch));
-    location.reload();
-    storeKey++;
-});
-
-$("#previBtn4").click(function() {
-    userSearch = $(this).text();
-    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
-    makingWeatherCall(curWeatherAPI);
-
-    // setting search value in local storage
-    localStorage.setItem(storeKey, JSON.stringify(userSearch));
-    location.reload();
-    storeKey++;
-});
-
-$("#previBtn5").click(function() {
-    userSearch = $(this).text();
-    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
-    makingWeatherCall(curWeatherAPI);
-
-    // setting search value in local storage
-    localStorage.setItem(storeKey, JSON.stringify(userSearch));
-    location.reload();
-    storeKey++;
-});
-
-if (storeKey === 0) {
-    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=Orlando" + myAPIWeatherKey;
-    makingWeatherCall(curWeatherAPI);
-
+var getSearchHistory = function() {
+  var getHistoryStorage = JSON.parse(localStorage.getItem("City History"));
+  if (getHistoryStorage === null) {
+    return;
+  }
+  else {
+    cityHistory = getHistoryStorage;
+    for (var i = 0; i < cityHistory.length; i++) {
+    var historyBtn = document.createElement("button");
+    historyBtn.textContent = cityHistory[i];
+    historyBtn.classList.add("w-100");
+    historyBtn.classList.add("history-btn");
+    historyBtn.setAttribute("id", "city-history");
+    historyContainer.appendChild(historyBtn);
+    }
+  }
 }
+
+var recallHistory = function(event) {
+  var cityHistoryText = event.target.textContent;
+  dayIndex = 1;
+  getLatLong(cityHistoryText);
+}
+
+var displayForecast = function(weatherData, cityName) {
+  var cityNameEl = document.querySelector("#city-name");
+  var tempEl = document.querySelector("#temp");
+  var windEl = document.querySelector("#wind");
+  var humidityEL = document.querySelector("#humidity");
+  var uvEl = document.querySelector("#uv-index");
+  var iconImg = document.querySelector("#icon-img");
+  if (weatherData.status === "city not found") {
+    console.log("Nothing");
+  }
+  else {
+    iconImg.src = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}.png`
+    cityNameEl.textContent = `${cityName} (${currentDate})`;
+    tempEl.textContent = weatherData.current.temp
+    windEl.textContent = weatherData.current.wind_speed
+    humidityEL.textContent = weatherData.current.humidity
+    uvEl.textContent = weatherData.current.uvi
+    var uvIndex = weatherData.current.uvi
+    if (uvIndex <= 2) {
+      uvEl.className = "low"
+    } 
+    else if (3 <= uvIndex <= 7) {
+      uvEl.className = "mid"
+    }
+    else if (uvIndex >= 8) {
+      uvEl.className = "high"
+    }
+    var i = 0;
+    $(".forecast-box").each(function() {
+      var futureDay = moment().add(dayIndex, "days").format("MM/DD/YYYY");
+      var futureDate = $(this).find("span")[0];
+      var futureTemp = $(this).find("span")[1];
+      var futureWind = $(this).find("span")[2];
+      var futureHumidity = $(this).find("span")[3];
+      var futureIcon = $(this).find("img")[0];
+      futureDate.textContent = futureDay;
+      futureIcon.src = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}.png`
+      futureTemp.textContent = weatherData.daily[i].temp.day;
+      futureWind.textContent = weatherData.daily[i].wind_speed;
+      futureHumidity.textContent = weatherData.daily[i].humidity;
+      i++;
+      dayIndex++;
+    })
+  }
+}
+
+getSearchHistory();
+searchBtn.addEventListener("click", formSubmitHandler);
+cityHistoryBtn.addEventListener("click", recallHistory);

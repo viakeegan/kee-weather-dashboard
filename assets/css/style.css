@@ -1,103 +1,101 @@
-h1 {
+* {
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  h1 {
     color: whitesmoke;
     font-weight: bolder;
     margin-bottom: 18px;
 }
-
-header {
+  
+  .hide {
+    display: none;
+  }
+  
+  header {
     animation: myanime 60000ms infinite alternate;
     background: linear-gradient(to right, rgb(97, 210, 255), rgb(34, 0, 114));
     text-align: center;
-}
-
-main {
-    padding: 0;
+  }
+  
+  main {
+    margin: 10px 20px 10px 10px;
+  }
+  
+  .alert {
+    color: red;
     margin: 0;
-    display: flex;
-    justify-content: space-around;
-}
-
-h2, h4 {
-    font-weight: bold;
-}
-
-#curIcon {
-    width: 70px;
-    height: 50px;
-}
-
-#cityAndIcon {
-    display: flex;
-}
-
-#main {
-    width: 100%;
-}
-
-#searchCity {
-    margin: 0 30px;
-}
-
-#search {
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.searchBtn {
+    padding: 0;
+  }
+  
+  .search-btn {
     color: whitesmoke;
     background-color: rgb(80, 162, 255);
     font-weight: bold;
     margin-bottom: 10px;
     border-radius: 5px;
-}
-
-#searching {
-    border-bottom: solid 5px gray;
-}
-
-.previBtns {
-    margin-top: 5px;
-    background-color: rgb(189, 189, 189);
-    border-radius: 5px;
-}
-
-#curDayUV {
-    color: white;
-    padding: 2px 12px;
+  }
+  
+  .city-history {
+    padding-top: 5px;
+    border-top: 1px solid black;
+  }
+  
+  .history-btn {
+    margin: 5px 0 5px 0;
+    border: 1px solid black;
     border-radius: 3px;
-}
+  }
+  
+  .results-container {
+    margin: 10px;
+  }
+  
+  .info-container {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  
+  .weather-info {
+    font-weight: 500;
+  }
+  
+  .city-name {
+    font-weight: bold;
+  }
+  
+  .forecast-container {
+    margin-top: 10px;
+  }
+  
+  .forecast-box {
+    color: white;
+    background-color: #2b4bff;
+    padding: 0 0 0 3px;
+  }
+  
+  .low {
+    border-radius: 3px;
+    background-color: green;
+    padding: 0 3px;
+  }
+  
+  .mid {
+    border-radius: 3px;
+    background-color: yellow;
+    padding: 0 3px;
+  }
+  
+  .high {
+    border-radius: 3px;
+    background-color: red;
+    padding: 0 3px;
+  }
 
-#fiveDays {
-    justify-content: space-between;
-}
-
-.dayForecast {
-    background-color: rgb(39, 70, 83);
-    color: whitesmoke;
-}
-
-.fiveIcons {
-    width: 50px;
-}
-
-.dayForecast:hover {
-    transition-duration: 750ms;
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0, 0.7);
-}
-
-button:hover {
+  button:hover {
     transition-duration: 2000ms;
     color: whitesmoke;
     background-color: rgb(0, 11, 114);
-}
-
-@media only screen and (max-width: 750px) {
-    main {
-        flex-direction: column;
-    }
-
-    #titleFiveDays {
-        padding-left: 30px;
-    }   
 }
 
