@@ -6,7 +6,7 @@ h1 {
 
 header {
     animation: myanime 60000ms infinite alternate;
-    background: linear-gradient(to right, rgb(97, 97, 255), rgb(34, 0, 114));
+    background: linear-gradient(to right, rgb(97, 210, 255), rgb(34, 0, 114));
     text-align: center;
 }
 
