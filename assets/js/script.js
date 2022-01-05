@@ -255,4 +255,9 @@ function makingWeatherCall(weather) {
            $("#currentCityDate").text(city + ", " + state + " " + moment().format("MM/DD/YYYY"));
        });
        
-       
+        // Adding icon to represent current weather
+        let curIcon = usingIcon(data.weather[0].icon);
+        $("#curIcon").attr("src", curIcon);
+    });
+};
+
