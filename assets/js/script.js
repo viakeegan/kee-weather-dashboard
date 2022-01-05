@@ -322,3 +322,83 @@ function previBtns() {
     }
 }
 
+previData();
+
+// User search data and displaying the data they are requesting
+$(".searchBtn").click(function() {
+    userSearch = $("#search").val();
+    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
+    makingWeatherCall(curWeatherAPI);
+
+    // setting search value in local storage
+    localStorage.setItem(storeKey, JSON.stringify(userSearch));
+    location.reload();
+    storeKey++;
+});
+
+console.log($("#previousSearch").children()[0]);
+console.log($("#previousSearch").children()[1]);
+console.log($("#previousSearch").children()[2]);
+console.log($("#previousSearch").children()[3]);
+console.log($("#previousSearch").children()[4]);
+
+$("#previBtn1").click(function() {
+    userSearch = $(this).text();
+    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
+    makingWeatherCall(curWeatherAPI);
+
+    // setting search value in local storage
+    localStorage.setItem(storeKey, JSON.stringify(userSearch));
+    location.reload();
+    storeKey++;
+});
+
+$("#previBtn2").click(function() {
+    userSearch = $(this).text();
+    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
+    makingWeatherCall(curWeatherAPI);
+
+    // setting search value in local storage
+    localStorage.setItem(storeKey, JSON.stringify(userSearch));
+    location.reload();
+    storeKey++;
+});
+
+$("#previBtn3").click(function() {
+    userSearch = $(this).text();
+    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
+    makingWeatherCall(curWeatherAPI);
+
+    // setting search value in local storage
+    localStorage.setItem(storeKey, JSON.stringify(userSearch));
+    location.reload();
+    storeKey++;
+});
+
+$("#previBtn4").click(function() {
+    userSearch = $(this).text();
+    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
+    makingWeatherCall(curWeatherAPI);
+
+    // setting search value in local storage
+    localStorage.setItem(storeKey, JSON.stringify(userSearch));
+    location.reload();
+    storeKey++;
+});
+
+$("#previBtn5").click(function() {
+    userSearch = $(this).text();
+    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + myAPIWeatherKey;
+    makingWeatherCall(curWeatherAPI);
+
+    // setting search value in local storage
+    localStorage.setItem(storeKey, JSON.stringify(userSearch));
+    location.reload();
+    storeKey++;
+});
+
+if (storeKey === 0) {
+    let curWeatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=Orlando" + myAPIWeatherKey;
+    makingWeatherCall(curWeatherAPI);
+
+}
