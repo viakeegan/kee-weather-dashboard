@@ -13,3 +13,39 @@ let dayOneItems = [
     "#dayOneUV"
 ];
 
+let dayTwoItems = [
+    "#dayTwoDate",
+    "#dayTwoIcon",
+    "#dayTwoTemp",
+    "#dayTwoWind",
+    "#dayTwoHumid",
+    "#dayTwoUV"
+];
+
+let dayThreeItems = [
+    "#dayThreeDate",
+    "#dayThreeIcon",
+    "#dayThreeTemp",
+    "#dayThreeWind",
+    "#dayThreeHumid",
+    "#dayThreeUV"
+];
+
+let dayFourItems = [
+    "#dayFourDate",
+    "#dayFourIcon",
+    "#dayFourTemp",
+    "#dayFourWind",
+    "#dayFourHumid",
+    "#dayFourUV"
+];
+
+let dayFiveItems = [
+    "#dayFiveDate",
+    "#dayFiveIcon",
+    "#dayFiveTemp",
+    "#dayFiveWind",
+    "#dayFiveHumid",
+    "#dayFiveUV"
+];
+
