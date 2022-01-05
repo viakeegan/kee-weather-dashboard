@@ -12,3 +12,178 @@
     <header class="row">
         <h1 class="col-sm-12">Weather Dashboard</h1>
     </header>
+
+    <main>
+        <div class="search col-sm-2" id="searchCity">
+            <div class="row" id="searching">
+                <h2>Search for a City:</h2>
+                <input type="search" id="search" class="col-sm-12" />
+                <button class="col-sm-12 searchBtn">
+                    Search
+                </button>
+            </div>
+
+            <div class="row" id="previousSearch">
+
+            </div>
+        </div>
+
+        <div class="sm-col-10" id="main">
+            <div class="card row">
+                <div class="col-sm-12" id="cityAndIcon">
+                    <h2 id="currentCityDate">
+                        City, State (Date)
+                    </h2>
+                    <img id="curIcon" />
+                </div>
+                <p id="temp">
+                    Temperature: <span id="curDayTemp"></span>
+                </p>
+
+                <p id="wind">
+                    Wind: <span id="curDayWind"></span>
+                </p>
+
+                <p id="humidity">
+                    Humidity: <span id="curDayHumid"></span>
+                </p>
+
+                <p id="uvIndex">
+                    UV Index: <span id="curDayUV"></span>
+                </p>
+            </div>
+
+            <div class="row">
+                <h4 class="row" id="titleFiveDays">
+                    5-Day Forecast:
+                </h4>
+                    
+                <div class="row" id="fiveDays">
+                    <div class="card col-sm-2 dayForecast" id="dayOne">
+                        <h2 id="dayOneDate">
+                            (Date)
+                        </h2>
+
+                        <img src="" class="fiveIcons" id="dayOneIcon" />
+
+                        <p id="temp">
+                            Temperature: <span id="dayOneTemp"></span>
+                        </p>
+
+                        <p id="wind">
+                            Wind: <span id="dayOneWind"></span>
+                        </p>
+
+                        <p id="humidity">
+                            Humidity: <span id="dayOneHumid"></span>
+                        </p>
+
+                        <p id="uvIndex">
+                            UV Index: <span id="dayOneUV"></span>
+                        </p>
+                    </div>
+
+                    <div class="card col-sm-2 dayForecast" id="dayTwo">
+                        <h2 id="dayTwoDate">
+                            (Date)
+                        </h2>
+
+                        <img src="" class="fiveIcons" id="dayTwoIcon" />
+
+                        <p id="temp">
+                            Temperature: <span id="dayTwoTemp"></span>
+                        </p>
+
+                        <p id="wind">
+                            Wind: <span id="dayTwoWind"></span>
+                        </p>
+
+                        <p id="humidity">
+                            Humidity: <span id="dayTwoHumid"></span>
+                        </p>
+
+                        <p id="uvIndex">
+                            UV Index: <span id="dayTwoUV"></span>
+                        </p>
+                    </div>
+
+                    <div class="card col-sm-2 dayForecast" id="dayThree">
+                        <h2 id="dayThreeDate">
+                            (Date)
+                        </h2>
+
+                        <img src="" class="fiveIcons" id="dayThreeIcon" />
+
+                        <p id="temp">
+                            Temperature: <span id="dayThreeTemp"></span>
+                        </p>
+
+                        <p id="wind">
+                            Wind: <span id="dayThreeWind"></span>
+                        </p>
+
+                        <p id="humidity">
+                            Humidity: <span id="dayThreeHumid"></span>
+                        </p>
+
+                        <p id="uvIndex">
+                            UV Index: <span id="dayThreeUV"></span>
+                        </p>
+                    </div>
+
+                    <div class="card col-sm-2 dayForecast" id="dayFour">
+                        <h2 id="dayFourDate">
+                            (Date)
+                        </h2>
+
+                        <img src="" class="fiveIcons" id="dayFourIcon" />
+
+                        <p id="temp">
+                            Temperature: <span id="dayFourTemp"></span>
+                        </p>
+
+                        <p id="wind">
+                            Wind: <span id="dayFourWind"></span>
+                        </p>
+
+                        <p id="humidity">
+                            Humidity: <span id="dayFourHumid"></span>
+                        </p>
+
+                        <p id="uvIndex">
+                            UV Index: <span id="dayFourUV"></span>
+                        </p>
+                    </div>
+
+                    <div class="card col-sm-2 dayForecast" id="dayFive">
+                        <h2 id="dayFiveDate">
+                            (Date)
+                        </h2>
+
+                        <img src="" class="fiveIcons" id="dayFiveIcon" />
+
+                        <p id="temp">
+                            Temperature: <span id="dayFiveTemp"></span>
+                        </p>
+
+                        <p id="wind">
+                            Wind: <span id="dayFiveWind"></span>
+                        </p>
+
+                        <p id="humidity">
+                            Humidity: <span id="dayFiveHumid"></span>
+                        </p>
+
+                        <p id="uvIndex">
+                            UV Index: <span id="dayFiveUV"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
