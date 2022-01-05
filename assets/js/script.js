@@ -300,3 +300,25 @@ function previData() {
     }
 };
 
+function previBtns() {
+    // loop through local storage and create buttons for the 5 most recent searches
+    for (let i = 0; i <= localStorage.length; i++) {
+        // button creation
+        let previBtn = $("<button></button>");
+        // variable to hold the code to retrieve the most recent items
+        let previ = localStorage.getItem(localStorage.length - i);
+        // i has to be greater than 0 or else its going to be undefined since the length is one number larger than the final index spot
+        // i has to be less than 6 so there can only be 5 buttons at most.
+        if (i > 0 && i < 6) {
+            // the next two lines of code are to get rid of the quotations.
+            previ = previ.replace('"',"");
+            previ = previ.replace('"',"");
+            // add the value of the localStorage to the button text
+            previBtn.text(previ);
+            previBtn.addClass("previBtns");
+            previBtn.attr("id", "previBtn"+i);
+            $("#previousSearch").append(previBtn);
+        }
+    }
+}
+
