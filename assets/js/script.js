@@ -244,4 +244,15 @@ function makingWeatherCall(weather) {
             }
         });
 
-        
+       // Reverse geocoding to pull the city and state and display that in the current weather
+       let reversed = reverseGeo(data.coord.lat, data.coord.lon);
+       fetch(reversed)
+       .then(response => response.json())
+       .then(function(data) {
+           let city = data[0].name;
+           let state = data[0].state;
+           $("#currentCityDate").text("");
+           $("#currentCityDate").text(city + ", " + state + " " + moment().format("MM/DD/YYYY"));
+       });
+       
+       
