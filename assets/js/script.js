@@ -261,3 +261,27 @@ function makingWeatherCall(weather) {
     });
 };
 
+// a function to keep from writing out the link everytime.
+function usingIcon(icon) {
+    let iconPath = "https://openweathermap.org/img/w/" + icon + ".png";
+    return iconPath;
+};
+
+// a function to keep from writing out the link everytime.
+function fetchOneCall(lat, lon) {
+    let ppfWeatherData = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly" + myAPIWeatherKey;
+    return ppfWeatherData;
+};
+
+// a function to keep from writing out the link everytime.
+function reverseGeo(lat, lon) {
+    let reversing = "http://api.openweathermap.org/geo/1.0/reverse?lat=" + lat + "&lon=" + lon + "&limit=1&appid=a15f02adbde7a78309af009d972b4360";
+    return reversing;
+}
+
+// a function for automating the dates for the 5 day forecast $(dayOneItems[x]).text(moment().add(1, "d"))
+function futureDates(nthDays) {
+    let xDays = moment().add(nthDays, "d").format("MM/DD/YYYY");
+    return xDays;
+}
+
