@@ -49,3 +49,10 @@ let dayFiveItems = [
     "#dayFiveUV"
 ];
 
+// fetching data from Open Weather Map based off city or zipcode
+function makingWeatherCall(weather) {
+    fetch(weather)
+    .then(response => response.json())
+    .then(function(data) {
+
+        
