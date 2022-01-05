@@ -91,3 +91,22 @@ button:hover {
     background-color: rgb(0, 11, 114);
 }
 
+@keyframes myanime {
+    from {
+        text-shadow: -10px 5px 7px rgba(0,0,0, 0.5);
+    }
+    to {
+        text-shadow: 50px 5px 7px rgba(0,0,0, 1);
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    main {
+        flex-direction: column;
+    }
+
+    #titleFiveDays {
+        padding-left: 30px;
+    }   
+}
+
