@@ -23,6 +23,8 @@ THEN I am again presented with current and future conditions for that city<br/>
 ![](./assets/images/06-server-side-apis-homework-demo.png)
 
 ## Deployed Site
+https://viakeegan.github.io/kee-weather-dashboard/
+
 
 
 
