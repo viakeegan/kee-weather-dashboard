@@ -71,9 +71,14 @@
   
   .forecast-box {
     color: white;
-    background-color: #2b4bff;
+    background-color: #38477a;
     padding: 0 0 0 3px;
   }
+
+  .forecast-box:hover {
+    transition-duration: 750ms;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0, 0.7);
+}
   
   .low {
     border-radius: 3px;
